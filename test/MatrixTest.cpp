@@ -432,11 +432,20 @@ TEST(MatrixOperations, Inverse1x1) {
 }
 
 // Matrix Inversion: 2x2 Matrix Case
-TEST(MatrixOperations, Inverse1x1) {
+TEST(MatrixOperations, Inverse2x2) {
   // Create Matrix Objects
-  Matrix<int> matrixInt(1, 1, 5);
-  Matrix<float> matrixFloat(1, 1, 5.0);
-  Matrix<double> matrixDouble(1, 1, 5.0);
+  Matrix<int> matrixInt(2, 2, 5);
+  matrixInt(0, 1) = 2;
+  matrixInt(1, 0) = -7;
+  matrixInt(1, 1) = -3;
+  Matrix<float> matrixFloat(2, 2, 5.0);
+  matrixFloat(0, 1) = 2;
+  matrixFloat(1, 0) = -7;
+  matrixFloat(1, 1) = -3;
+  Matrix<double> matrixDouble(2, 2, 5.0);
+  matrixDouble(0, 1) = 2;
+  matrixDouble(1, 0) = -7;
+  matrixDouble(1, 1) = -3;
 
   // Perform Scalar Division
   Matrix<int> matrixIntOut = matrixInt.inverse();
@@ -444,13 +453,22 @@ TEST(MatrixOperations, Inverse1x1) {
   Matrix<double> matrixDoubleOut = matrixDouble.inverse();
 
   // Check Integer Matrix Values
-  EXPECT_EQ(matrixIntOut(0, 0), 0);
+  EXPECT_EQ(matrixIntOut(0, 0), 3);
+  EXPECT_EQ(matrixIntOut(0, 1), 2);
+  EXPECT_EQ(matrixIntOut(1, 0), -7);
+  EXPECT_EQ(matrixIntOut(1, 1), -5);
 
   // Check Float Matrix Values
-  EXPECT_NEAR(matrixFloatOut(0, 0), 0.2, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(0, 0), 3.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(0, 1), 2.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(1, 0), -7.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(1, 1), -5.0, 1e-6);
 
   // Check Double Matrix Values
-  EXPECT_EQ(matrixDoubleOut(0, 0), 0.2);
+  EXPECT_EQ(matrixDoubleOut(0, 0), 3.0);
+  EXPECT_EQ(matrixDoubleOut(0, 1), 2.0);
+  EXPECT_EQ(matrixDoubleOut(1, 0), -7.0);
+  EXPECT_EQ(matrixDoubleOut(1, 1), -5.0);
 }
 
 // Matrix inversion: General Case

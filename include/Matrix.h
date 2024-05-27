@@ -5,10 +5,10 @@
  */
 
 // STL Include
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
-#include <cmath>
 
 // Matrix Class Implementation
 template <typename T>
@@ -145,7 +145,7 @@ class Matrix {
     if (nRows_ != nCols_) {
       throw std::invalid_argument("Matrix must be square for inversion");
     }
-    if (calculateDeterminant() < 1e-6) {
+    if (std::abs(calculateDeterminant()) < 1e-6) {
       throw std::runtime_error("Matrix is singular");
     }
 
@@ -154,7 +154,7 @@ class Matrix {
 
     for (unsigned i = 0; i < nCols_; i++) {
       for (unsigned j = 0; j < nRows_; j++) {
-        Out(i,j) = data_[i][j];
+        Out(i, j) = data_[i][j];
       }
     }
 
@@ -162,7 +162,7 @@ class Matrix {
 
     for (unsigned i = 0; i < nCols_; i++) {
       for (unsigned j = 0; j < nRows_; j++) {
-        Out(i,j) = Out(i,j) * d;
+        Out(i, j) = Out(i, j) * d;
       }
     }
     return Out;
@@ -191,12 +191,12 @@ class Matrix {
     T sign = 1;
     for (unsigned i = 0; i < size; i++) {
       // Create Submatrix
-      Matrix<T> subMatrix(size-1, size-1);
+      Matrix<T> subMatrix(size - 1, size - 1);
       for (unsigned j = 1; j < size; j++) {
         unsigned z = 0;
         for (unsigned k = 0; k < size; k++) {
           if (k != i) {
-            subMatrix(j-1,z) = data_[j][k];
+            subMatrix(j - 1, z) = data_[j][k];
             z++;
           }
         }
@@ -212,7 +212,7 @@ class Matrix {
   // Calculate Matrix Cofactor
   Matrix<T> calculateCofactor() {
     Matrix<T> result(nRows_, nCols_);
-    Matrix<T> subMatrix(nRows_-1, nCols_-1);
+    Matrix<T> subMatrix(nRows_ - 1, nCols_ - 1);
     for (unsigned i = 0; i < nRows_; i++) {
       for (unsigned j = 0; j < nCols_; j++) {
         unsigned p = 0;
@@ -225,14 +225,13 @@ class Matrix {
             if (l == j) {
               continue;
             }
-            subMatrix(p,q) = data_[k][l];
+            subMatrix(p, q) = data_[k][l];
             q++;
           }
           p++;
         }
-        result(i,j) = std::pow(-1, i+j) * subMatrix.calculateDeterminant();
+        result(i, j) = std::pow(-1, i + j) * subMatrix.calculateDeterminant();
       }
-
     }
     return result;
   }
