@@ -324,3 +324,47 @@ TEST(ScalarOperations, Subtraction) {
     }
   }
 }
+
+// Scalar Multiplication
+TEST(ScalarOperations, Multiplication) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(2, 2, 1);
+  Matrix<float> matrixFloat(2, 2, 1.0);
+  Matrix<double> matrixDouble(2, 2, 1.0);
+
+  // Perform Scalar Multiplication
+  Matrix<int> matrixIntOut = matrixInt * 2;
+  Matrix<float> matrixFloatOut = matrixFloat * 2.0;
+  Matrix<double> matrixDoubleOut = matrixDouble * 2.0;
+
+  // Check Matrix Values
+  for (unsigned i = 0; i < 2; i++) {
+    for (unsigned j = 0; j < 2; j++) {
+      ASSERT_EQ(matrixIntOut(i, j), 2);
+      ASSERT_EQ(matrixFloatOut(i, j), 2.0);
+      ASSERT_EQ(matrixDoubleOut(i, j), 2.0);
+    }
+  }
+}
+
+// Scalar Division
+TEST(ScalarOperations, Division) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(2, 2, 1);
+  Matrix<float> matrixFloat(2, 2, 1.0);
+  Matrix<double> matrixDouble(2, 2, 1.0);
+
+  // Perform Scalar Division
+  Matrix<int> matrixIntOut = matrixInt / 2;
+  Matrix<float> matrixFloatOut = matrixFloat / 2.0;
+  Matrix<double> matrixDoubleOut = matrixDouble / 2.0;
+
+  // Check Matrix Values
+  for (unsigned i = 0; i < 2; i++) {
+    for (unsigned j = 0; j < 2; j++) {
+      ASSERT_EQ(matrixIntOut(i, j), 0);
+      ASSERT_EQ(matrixFloatOut(i, j), 0.5);
+      ASSERT_EQ(matrixDoubleOut(i, j), 0.5);
+    }
+  }
+}
