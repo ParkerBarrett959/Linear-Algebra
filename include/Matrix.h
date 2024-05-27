@@ -85,6 +85,15 @@ class Matrix {
   }
 
   // Scalar Addition
+  Matrix<T> operator+(T val) {
+    Matrix<T> Out(nRows_, nCols_);
+    for (unsigned i = 0; i < nRows_; i++) {
+      for (unsigned j = 0; j < nCols_; j++) {
+        Out(i, j) = data_[i][j] + val;
+      }
+    }
+    return Out;
+  }
 
   // Scalar Subtraction
 
