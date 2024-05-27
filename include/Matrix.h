@@ -53,6 +53,18 @@ class Matrix {
   }
 
   // Matrix Subtraction
+  Matrix<T> operator-(Matrix& M) {
+    if ((M.rows() != nRows_) || (M.cols() != nCols_)) {
+      throw std::invalid_argument("Matrices must have same size");
+    }
+    Matrix Out(nRows_, nCols_);
+    for (unsigned i = 0; i < nRows_; i++) {
+      for (unsigned j = 0; j < nCols_; j++) {
+        Out(i, j) = data_[i][j] - M(i, j);
+      }
+    }
+    return Out;
+  }
 
   // Matrix Multiplication
 
