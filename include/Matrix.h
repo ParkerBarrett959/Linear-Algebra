@@ -19,7 +19,7 @@ class Matrix {
     // Constuct Matrix of Size with Specific Value
     Matrix(unsigned rows, unsigned cols, T val = 0) :
         nRows_(rows), nCols_(cols) {
-	data_resize(nRows_);
+	    data_.resize(nRows_);
         for (unsigned i = 0; i < data_.size(); i++) {
 	    data_[i].resize(nCols_, val);
 	}
