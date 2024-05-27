@@ -410,8 +410,48 @@ TEST(MatrixOperations, Transpose) {
 }
 
 // Matrix Inversion: 1x1 Matrix Case
+TEST(MatrixOperations, Inverse1x1) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(1, 1, 5);
+  Matrix<float> matrixFloat(1, 1, 5.0);
+  Matrix<double> matrixDouble(1, 1, 5.0);
+
+  // Perform Scalar Division
+  Matrix<int> matrixIntOut = matrixInt.inverse();
+  Matrix<float> matrixFloatOut = matrixFloat.inverse();
+  Matrix<double> matrixDoubleOut = matrixDouble.inverse();
+
+  // Check Integer Matrix Values
+  EXPECT_EQ(matrixIntOut(0, 0), 0);
+
+  // Check Float Matrix Values
+  EXPECT_NEAR(matrixFloatOut(0, 0), 0.2, 1e-6);
+
+  // Check Double Matrix Values
+  EXPECT_EQ(matrixDoubleOut(0, 0), 0.2);
+}
 
 // Matrix Inversion: 2x2 Matrix Case
+TEST(MatrixOperations, Inverse1x1) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(1, 1, 5);
+  Matrix<float> matrixFloat(1, 1, 5.0);
+  Matrix<double> matrixDouble(1, 1, 5.0);
+
+  // Perform Scalar Division
+  Matrix<int> matrixIntOut = matrixInt.inverse();
+  Matrix<float> matrixFloatOut = matrixFloat.inverse();
+  Matrix<double> matrixDoubleOut = matrixDouble.inverse();
+
+  // Check Integer Matrix Values
+  EXPECT_EQ(matrixIntOut(0, 0), 0);
+
+  // Check Float Matrix Values
+  EXPECT_NEAR(matrixFloatOut(0, 0), 0.2, 1e-6);
+
+  // Check Double Matrix Values
+  EXPECT_EQ(matrixDoubleOut(0, 0), 0.2);
+}
 
 // Matrix inversion: General Case
 
