@@ -472,6 +472,74 @@ TEST(MatrixOperations, Inverse2x2) {
 }
 
 // Matrix inversion: General Case
+TEST(MatrixOperations, InverseGeneral) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(3, 3);
+  matrixInt(0, 1) = -3;
+  matrixInt(0, 2) = -2;
+  matrixInt(1, 0) = 1;
+  matrixInt(1, 1) = -4;
+  matrixInt(1, 2) = -2;
+  matrixInt(2, 0) = -3;
+  matrixInt(2, 1) = 4;
+  matrixInt(2, 2) = 1;
+  Matrix<float> matrixFloat(3, 3);
+  matrixFloat(0, 1) = -3;
+  matrixFloat(0, 2) = -2;
+  matrixFloat(1, 0) = 1;
+  matrixFloat(1, 1) = -4;
+  matrixFloat(1, 2) = -2;
+  matrixFloat(2, 0) = -3;
+  matrixFloat(2, 1) = 4;
+  matrixFloat(2, 2) = 1;
+  Matrix<double> matrixDouble(3, 3);
+  matrixDouble(0, 1) = -3;
+  matrixDouble(0, 2) = -2;
+  matrixDouble(1, 0) = 1;
+  matrixDouble(1, 1) = -4;
+  matrixDouble(1, 2) = -2;
+  matrixDouble(2, 0) = -3;
+  matrixDouble(2, 1) = 4;
+  matrixDouble(2, 2) = 1;
+
+  // Perform Scalar Division
+  Matrix<int> matrixIntOut = matrixInt.inverse();
+  Matrix<float> matrixFloatOut = matrixFloat.inverse();
+  Matrix<double> matrixDoubleOut = matrixDouble.inverse();
+
+  // Check Integer Matrix Values
+  EXPECT_EQ(matrixIntOut(0, 0), 4);
+  EXPECT_EQ(matrixIntOut(0, 1), -5);
+  EXPECT_EQ(matrixIntOut(0, 2), -2);
+  EXPECT_EQ(matrixIntOut(1, 0), 5);
+  EXPECT_EQ(matrixIntOut(1, 1), -6);
+  EXPECT_EQ(matrixIntOut(1, 2), -2);
+  EXPECT_EQ(matrixIntOut(2, 0), -8);
+  EXPECT_EQ(matrixIntOut(2, 1), 9);
+  EXPECT_EQ(matrixIntOut(2, 2), 3);
+
+  // Check Float Matrix Values
+  EXPECT_NEAR(matrixFloatOut(0, 0), 4.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(0, 1), -5.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(0, 2), -2.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(1, 0), 5.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(1, 1), -6.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(1, 2), -2.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(2, 0), -8.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(2, 1), 9.0, 1e-6);
+  EXPECT_NEAR(matrixFloatOut(2, 2), 3.0, 1e-6);
+
+  // Check Double Matrix Values
+  EXPECT_EQ(matrixDoubleOut(0, 0), 4.0);
+  EXPECT_EQ(matrixDoubleOut(0, 1), -5.0);
+  EXPECT_EQ(matrixDoubleOut(0, 2), -2.0);
+  EXPECT_EQ(matrixDoubleOut(1, 0), 5.0);
+  EXPECT_EQ(matrixDoubleOut(1, 1), -6.0);
+  EXPECT_EQ(matrixDoubleOut(1, 2), -2.0);
+  EXPECT_EQ(matrixDoubleOut(2, 0), -8.0);
+  EXPECT_EQ(matrixDoubleOut(2, 1), 9.0);
+  EXPECT_EQ(matrixDoubleOut(2, 2), 3.0);
+}
 
 // Matrix Inversion 0 Determinant Exception
 TEST(MatrixOperations, InverseZeroDeterminantException) {
