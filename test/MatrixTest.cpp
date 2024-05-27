@@ -42,9 +42,9 @@ TEST(MatrixConstructor, DefaultValue) {
   // Check Matrix Values
   for (unsigned i = 0; i < 2; i++) {
     for (unsigned j = 0; j < 2; j++) {
-      ASSERT_EQ(matrixInt(i,j), 0);
-      ASSERT_EQ(matrixFloat(i,j), 0.0);
-      ASSERT_EQ(matrixDouble(i,j), 0.0);
+      ASSERT_EQ(matrixInt(i, j), 0);
+      ASSERT_EQ(matrixFloat(i, j), 0.0);
+      ASSERT_EQ(matrixDouble(i, j), 0.0);
     }
   }
 }
@@ -67,9 +67,9 @@ TEST(MatrixConstructor, SetValue) {
   // Check Matrix Values
   for (unsigned i = 0; i < 2; i++) {
     for (unsigned j = 0; j < 2; j++) {
-      ASSERT_EQ(matrixInt(i,j), 1);
-      ASSERT_EQ(matrixFloat(i,j), 1.0);
-      ASSERT_EQ(matrixDouble(i,j), 1.0);
+      ASSERT_EQ(matrixInt(i, j), 1);
+      ASSERT_EQ(matrixFloat(i, j), 1.0);
+      ASSERT_EQ(matrixDouble(i, j), 1.0);
     }
   }
 }

@@ -33,7 +33,7 @@ class Matrix {
   unsigned cols() const { return nCols_; }
 
   // Index Operator
-  T operator()(const unsigned row, const unsigned col) {
+  T& operator()(const unsigned row, const unsigned col) {
     return data_[row][col];
   }
 
