@@ -22,5 +22,4 @@ TEST(MatrixConstructor, Default) {
   ASSERT_EQ(matrixFloat.cols(), 0);
   ASSERT_EQ(matrixDouble.rows(), 0);
   ASSERT_EQ(matrixDouble.cols(), 0);
-
 }
