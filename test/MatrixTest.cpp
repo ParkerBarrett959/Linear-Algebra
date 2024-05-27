@@ -211,3 +211,72 @@ TEST(MatrixOperations, SubtractionException) {
       },
       std::invalid_argument);
 }
+
+// Matrix Multiplication
+TEST(MatrixOperations, Multiplication) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(2, 2, 1);
+  Matrix<float> matrixFloat(2, 2, 1.0);
+  Matrix<double> matrixDouble(2, 2, 1.0);
+
+  // Perform Matrix Multiplication
+  Matrix<int> matrixIntOut = matrixInt * matrixInt;
+  Matrix<float> matrixFloatOut = matrixFloat * matrixFloat;
+  Matrix<double> matrixDoubleOut = matrixDouble * matrixDouble;
+
+  // Check Matrix Values
+  for (unsigned i = 0; i < 2; i++) {
+    for (unsigned j = 0; j < 2; j++) {
+      ASSERT_EQ(matrixIntOut(i, j), 2);
+      ASSERT_EQ(matrixFloatOut(i, j), 2.0);
+      ASSERT_EQ(matrixDoubleOut(i, j), 2.0);
+    }
+  }
+}
+
+// Matrix Multiplication Exception
+TEST(MatrixOperations, MultiplicationException) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(2, 2, 1);
+  Matrix<int> matrixInt2(3, 3);
+  Matrix<float> matrixFloat(2, 2, 1.0);
+  Matrix<float> matrixFloat2(3, 3);
+  Matrix<double> matrixDouble(2, 2, 1.0);
+  Matrix<double> matrixDouble2(3, 3);
+
+  // Integer Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<int> matrixIntOut = matrixInt * matrixInt2;
+        } catch (const std::invalid_argument& e) {
+          EXPECT_STREQ("Invalid matrix sizes for multiplication", e.what());
+          throw;
+        }
+      },
+      std::invalid_argument);
+
+  // Float Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<float> matrixFloatOut = matrixFloat * matrixFloat2;
+        } catch (const std::invalid_argument& e) {
+          EXPECT_STREQ("Invalid matrix sizes for multiplication", e.what());
+          throw;
+        }
+      },
+      std::invalid_argument);
+
+  // Double Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<double> matrixDoubleOut = matrixDouble * matrixDouble2;
+        } catch (const std::invalid_argument& e) {
+          EXPECT_STREQ("Invalid matrix sizes for multiplication", e.what());
+          throw;
+        }
+      },
+      std::invalid_argument);
+}
