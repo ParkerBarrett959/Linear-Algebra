@@ -27,10 +27,15 @@ class Matrix {
   ~Matrix() {}
 
   // Get Number of Rows
-  unsigned rows() { return nRows_; }
+  unsigned rows() const { return nRows_; }
 
   // Get Number of Columns
-  unsigned cols() { return nCols_; }
+  unsigned cols() const { return nCols_; }
+
+  // Index Operator
+  T operator()(const unsigned row, const unsigned col) {
+    return data_[row][col];
+  }
 
  private:
   // Matrix Data
