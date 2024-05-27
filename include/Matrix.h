@@ -128,6 +128,17 @@ class Matrix {
     return Out;
   }
 
+  // Transpose
+  Matrix<T> transpose() {
+    Matrix<T> Out(nCols_, nRows_);
+    for (unsigned i = 0; i < nRows_; i++) {
+      for (unsigned j = 0; j < nCols_; j++) {
+        Out(j, i) = data_[i][j];
+      }
+    }
+    return Out;
+  }
+
  private:
   // Matrix Data
   unsigned nRows_;

@@ -368,3 +368,43 @@ TEST(ScalarOperations, Division) {
     }
   }
 }
+
+// Matrix Transpose
+TEST(MatrixOperations, Transpose) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(2, 2, 1);
+  matrixInt(0, 1) = 2;
+  matrixInt(1, 0) = 3;
+  matrixInt(1, 1) = 4;
+  Matrix<float> matrixFloat(2, 2, 1.0);
+  matrixFloat(0, 1) = 2;
+  matrixFloat(1, 0) = 3;
+  matrixFloat(1, 1) = 4;
+  Matrix<double> matrixDouble(2, 2, 1.0);
+  matrixDouble(0, 1) = 2;
+  matrixDouble(1, 0) = 3;
+  matrixDouble(1, 1) = 4;
+
+  // Perform Scalar Division
+  Matrix<int> matrixIntOut = matrixInt.transpose();
+  Matrix<float> matrixFloatOut = matrixFloat.transpose();
+  Matrix<double> matrixDoubleOut = matrixDouble.transpose();
+
+  // Check Integer Matrix Values
+  EXPECT_EQ(matrixIntOut(0, 0), 1);
+  EXPECT_EQ(matrixIntOut(0, 1), 3);
+  EXPECT_EQ(matrixIntOut(1, 0), 2);
+  EXPECT_EQ(matrixIntOut(1, 1), 4);
+
+  // Check Float Matrix Values
+  EXPECT_EQ(matrixFloatOut(0, 0), 1.0);
+  EXPECT_EQ(matrixFloatOut(0, 1), 3.0);
+  EXPECT_EQ(matrixFloatOut(1, 0), 2.0);
+  EXPECT_EQ(matrixFloatOut(1, 1), 4.0);
+
+  // Check Double Matrix Values
+  EXPECT_EQ(matrixDoubleOut(0, 0), 1.0);
+  EXPECT_EQ(matrixDoubleOut(0, 1), 3.0);
+  EXPECT_EQ(matrixDoubleOut(1, 0), 2.0);
+  EXPECT_EQ(matrixDoubleOut(1, 1), 4.0);
+}
