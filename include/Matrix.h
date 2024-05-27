@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <vector>
+#include <cmath>
 
 // Matrix Class Implementation
 template <typename T>
@@ -139,9 +140,100 @@ class Matrix {
     return Out;
   }
 
+  // Inverse
+  Matrix<T> inverse() {
+    if (nRows_ != nCols_) {
+      throw std::invalid_argument("Matrix must be square for inversion");
+    }
+    if (calculateDeterminant() < 1e-6) {
+      throw std::runtime_error("Matrix is singular");
+    }
+
+    T d = 1 / calculateDeterminant();
+    Matrix<T> Out(nRows_, nCols_);
+
+    for (unsigned i = 0; i < nCols_; i++) {
+      for (unsigned j = 0; j < nRows_; j++) {
+        Out(i,j) = data_[i][j];
+      }
+    }
+
+    Out = (Out.calculateCofactor()).transpose();
+
+    for (unsigned i = 0; i < nCols_; i++) {
+      for (unsigned j = 0; j < nRows_; j++) {
+        Out(i,j) = Out(i,j) * d;
+      }
+    }
+    return Out;
+  }
+
  private:
   // Matrix Data
   unsigned nRows_;
   unsigned nCols_;
   std::vector<std::vector<T>> data_;
+
+  // Calculate Matrix Determinant
+  T calculateDeterminant() {
+    // Check for Basic Cases
+    unsigned size = nRows_;
+    if (size == 0) {
+      return 1;
+    } else if (size == 1) {
+      return data_[0][0];
+    } else if (size == 2) {
+      return ((data_[0][0] * data_[1][1]) - (data_[0][1] * data_[1][0]));
+    }
+
+    // Calculate general Result
+    T result = 0;
+    T sign = 1;
+    for (unsigned i = 0; i < size; i++) {
+      // Create Submatrix
+      Matrix<T> subMatrix(size-1, size-1);
+      for (unsigned j = 1; j < size; j++) {
+        unsigned z = 0;
+        for (unsigned k = 0; k < size; k++) {
+          if (k != i) {
+            subMatrix(j-1,z) = data_[j][k];
+            z++;
+          }
+        }
+      }
+
+      // Recursion Call
+      result = result + sign * data_[0][i] * subMatrix.calculateDeterminant();
+      sign = -sign;
+    }
+    return result;
+  }
+
+  // Calculate Matrix Cofactor
+  Matrix<T> calculateCofactor() {
+    Matrix<T> result(nRows_, nCols_);
+    Matrix<T> subMatrix(nRows_-1, nCols_-1);
+    for (unsigned i = 0; i < nRows_; i++) {
+      for (unsigned j = 0; j < nCols_; j++) {
+        unsigned p = 0;
+        for (unsigned k = 0; k < nRows_; k++) {
+          if (k == i) {
+            continue;
+          }
+          unsigned q = 0;
+          for (unsigned l = 0; l < nRows_; l++) {
+            if (l == j) {
+              continue;
+            }
+            subMatrix(p,q) = data_[k][l];
+            q++;
+          }
+          p++;
+        }
+        result(i,j) = std::pow(-1, i+j) * subMatrix.calculateDeterminant();
+      }
+
+    }
+    return result;
+  }
 };

@@ -408,3 +408,106 @@ TEST(MatrixOperations, Transpose) {
   EXPECT_EQ(matrixDoubleOut(1, 0), 2.0);
   EXPECT_EQ(matrixDoubleOut(1, 1), 4.0);
 }
+
+// Matrix Inversion: 1x1 Matrix Case
+
+// Matrix Inversion: 2x2 Matrix Case
+
+// Matrix inversion: General Case
+
+// Matrix Inversion 0 Determinant Exception
+TEST(MatrixOperations, InverseZeroDeterminantException) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(2, 2, 6);
+  matrixInt(0, 1) = 4;
+  matrixInt(1, 0) = 3;
+  matrixInt(1, 1) = 2;
+  Matrix<float> matrixFloat(2, 2, 6.0);
+  matrixFloat(0, 1) = 4;
+  matrixFloat(1, 0) = 3;
+  matrixFloat(1, 1) = 2;
+  Matrix<double> matrixDouble(2, 2, 6.0);
+  matrixDouble(0, 1) = 4;
+  matrixDouble(1, 0) = 3;
+  matrixDouble(1, 1) = 2;
+
+  // Integer Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<int> matrixIntOut = matrixInt.inverse();
+        } catch (const std::runtime_error& e) {
+          EXPECT_STREQ("Matrix is singular", e.what());
+          throw;
+        }
+      },
+      std::runtime_error);
+
+  // Float Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<float> matrixFloatOut = matrixFloat.inverse();
+        } catch (const std::runtime_error& e) {
+          EXPECT_STREQ("Matrix is singular", e.what());
+          throw;
+        }
+      },
+      std::runtime_error);
+
+  // Double Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<double> matrixDoubleOut = matrixDouble.inverse();
+        } catch (const std::runtime_error& e) {
+          EXPECT_STREQ("Matrix is singular", e.what());
+          throw;
+        }
+      },
+      std::runtime_error);
+}
+
+// Matrix Inversion Size Exception
+TEST(MatrixOperations, InverseNonSquareException) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt(3, 2, 1);
+  Matrix<float> matrixFloat(3, 2, 1.0);
+  Matrix<double> matrixDouble(3, 2, 1.0);
+
+  // Integer Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<int> matrixIntOut = matrixInt.inverse();
+        } catch (const std::invalid_argument& e) {
+          EXPECT_STREQ("Matrix must be square for inversion", e.what());
+          throw;
+        }
+      },
+      std::invalid_argument);
+
+  // Float Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<float> matrixFloatOut = matrixFloat.inverse();
+        } catch (const std::invalid_argument& e) {
+          EXPECT_STREQ("Matrix must be square for inversion", e.what());
+          throw;
+        }
+      },
+      std::invalid_argument);
+
+  // Double Matrix Exception
+  EXPECT_THROW(
+      {
+        try {
+          Matrix<double> matrixDoubleOut = matrixDouble.inverse();
+        } catch (const std::invalid_argument& e) {
+          EXPECT_STREQ("Matrix must be square for inversion", e.what());
+          throw;
+        }
+      },
+      std::invalid_argument);
+}
