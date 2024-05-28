@@ -261,3 +261,8 @@ class Matrix {
     return result;
   }
 };
+
+// Matrix Type Aliasing
+typedef Matrix<int> Matrixi;
+typedef Matrix<float> Matrixf;
+typedef Matrix<double> Matrixd;

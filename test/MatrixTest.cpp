@@ -718,3 +718,20 @@ TEST(MatrixOperations, InverseNonSquareException) {
       },
       std::invalid_argument);
 }
+
+// Matrix Types
+TEST(MatrixTypes, Generic) {
+  // Create Matrix Objects
+  Matrixi matrixInt(2, 2);
+  Matrixf matrixFloat(2, 2);
+  Matrixd matrixDouble(2, 2);
+
+  // Check Matrix Values
+  for (unsigned i = 0; i < 2; i++) {
+    for (unsigned j = 0; j < 2; j++) {
+      EXPECT_EQ(matrixInt(i,j), 0);
+      EXPECT_EQ(matrixFloat(i,j), 0);
+      EXPECT_EQ(matrixDouble(i,j), 0);
+    }
+  }
+}
