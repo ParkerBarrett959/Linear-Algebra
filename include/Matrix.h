@@ -39,6 +39,31 @@ class Matrix {
     return data_[row][col];
   }
 
+  // Create Matrix of Zeros
+  static Matrix<T> Zeros(const unsigned nRows, const unsigned nCols) {
+    Matrix<T> Out(nRows, nCols);
+    return Out;
+  }
+
+  // Create Matrix of Ones
+  static Matrix<T> Ones(const unsigned nRows, const unsigned nCols) {
+    Matrix<T> Out(nRows, nCols, 1);
+    return Out;
+  }
+
+  // Create Identity Matrix
+  static Matrix<T> Identity(const unsigned nDim) {
+    Matrix<T> Out(nDim, nDim);
+    for (unsigned i = 0; i < nDim; i++) {
+      for (unsigned j = 0; j < nDim; j++) {
+        if (i == j) {
+          Out(i, j) = 1;
+        }
+      }
+    }
+    return Out;
+  }
+
   // Matrix Addition
   Matrix<T> operator+(Matrix<T>& M) {
     if ((M.rows() != nRows_) || (M.cols() != nCols_)) {

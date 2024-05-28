@@ -74,6 +74,87 @@ TEST(MatrixConstructor, SetValue) {
   }
 }
 
+// Zeros Matrix
+TEST(MatrixCreator, Zeros) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt = Matrix<int>::Zeros(2, 2);
+  Matrix<float> matrixFloat = Matrix<float>::Zeros(2, 2);
+  Matrix<double> matrixDouble = Matrix<double>::Zeros(2, 2);
+
+  // Check Matrix Size
+  ASSERT_EQ(matrixInt.rows(), 2);
+  ASSERT_EQ(matrixInt.cols(), 2);
+  ASSERT_EQ(matrixFloat.rows(), 2);
+  ASSERT_EQ(matrixFloat.cols(), 2);
+  ASSERT_EQ(matrixDouble.rows(), 2);
+  ASSERT_EQ(matrixDouble.cols(), 2);
+
+  // Check Matrix Values
+  for (unsigned i = 0; i < 2; i++) {
+    for (unsigned j = 0; j < 2; j++) {
+      ASSERT_EQ(matrixInt(i, j), 0);
+      ASSERT_EQ(matrixFloat(i, j), 0.0);
+      ASSERT_EQ(matrixDouble(i, j), 0.0);
+    }
+  }
+}
+
+// Ones Matrix
+TEST(MatrixCreator, Ones) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt = Matrix<int>::Ones(2, 2);
+  Matrix<float> matrixFloat = Matrix<float>::Ones(2, 2);
+  Matrix<double> matrixDouble = Matrix<double>::Ones(2, 2);
+
+  // Check Matrix Size
+  ASSERT_EQ(matrixInt.rows(), 2);
+  ASSERT_EQ(matrixInt.cols(), 2);
+  ASSERT_EQ(matrixFloat.rows(), 2);
+  ASSERT_EQ(matrixFloat.cols(), 2);
+  ASSERT_EQ(matrixDouble.rows(), 2);
+  ASSERT_EQ(matrixDouble.cols(), 2);
+
+  // Check Matrix Values
+  for (unsigned i = 0; i < 2; i++) {
+    for (unsigned j = 0; j < 2; j++) {
+      ASSERT_EQ(matrixInt(i, j), 1);
+      ASSERT_EQ(matrixFloat(i, j), 1.0);
+      ASSERT_EQ(matrixDouble(i, j), 1.0);
+    }
+  }
+}
+
+// Identity Matrix
+TEST(MatrixCreator, Identity) {
+  // Create Matrix Objects
+  Matrix<int> matrixInt = Matrix<int>::Identity(3);
+  Matrix<float> matrixFloat = Matrix<float>::Identity(3);
+  Matrix<double> matrixDouble = Matrix<double>::Identity(3);
+
+  // Check Matrix Size
+  ASSERT_EQ(matrixInt.rows(), 3);
+  ASSERT_EQ(matrixInt.cols(), 3);
+  ASSERT_EQ(matrixFloat.rows(), 3);
+  ASSERT_EQ(matrixFloat.cols(), 3);
+  ASSERT_EQ(matrixDouble.rows(), 3);
+  ASSERT_EQ(matrixDouble.cols(), 3);
+
+  // Check Matrix Values
+  for (unsigned i = 0; i < 3; i++) {
+    for (unsigned j = 0; j < 3; j++) {
+      if (i == j) {
+        ASSERT_EQ(matrixInt(i, j), 1);
+        ASSERT_EQ(matrixFloat(i, j), 1.0);
+        ASSERT_EQ(matrixDouble(i, j), 1.0);
+      } else {
+        ASSERT_EQ(matrixInt(i, j), 0);
+        ASSERT_EQ(matrixFloat(i, j), 0.0);
+        ASSERT_EQ(matrixDouble(i, j), 0.0);
+      }
+    }
+  }
+}
+
 // Matrix Addition
 TEST(MatrixOperations, Addition) {
   // Create Matrix Objects
